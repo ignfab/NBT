@@ -8,6 +8,11 @@
 name: Gradle Package
 
 on:
+  push:
+    paths:
+      - src/main/**
+      - build.gradle
+      - .github/workflows/gradle-publish.yml
   release:
     types: [created]
 
@@ -40,5 +45,5 @@ jobs:
     - name: Publish to GitHub Packages
       run: ./gradlew publish
       env:
-        USERNAME: ${{ github.actor }}
-        TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_ACTOR: ${{ github.actor }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
