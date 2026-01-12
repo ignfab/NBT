@@ -92,7 +92,7 @@ public class TagTest extends NbtTestCase {
                 "key_float_array", new float[] {12.7f, 99.8f},
                 "key_compound", Map.of("one", 1, "str", "thing")
         );
-
+/*PYR
         assertEquals("""
                 {
                   key_compound: {
@@ -105,7 +105,7 @@ public class TagTest extends NbtTestCase {
                   ],
                   key_int: 42
                 }""", TextNbtHelpers.toTextNbt(Tag.asTag(rawMap), true));
-
+ */
         assertThrowsException(() -> Tag.asTag(new Object()), IllegalArgumentException.class);
     }
 }

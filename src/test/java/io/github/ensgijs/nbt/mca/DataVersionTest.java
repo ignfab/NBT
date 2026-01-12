@@ -96,7 +96,7 @@ public class DataVersionTest extends McaTestCase {
         assertEquals("2529 (1.16 20w17a)", DataVersion.JAVA_1_16_20W17A.toString());
         assertEquals("2864 (1.18.1 RC3)", DataVersion.JAVA_1_18_1_RC3.toString());
     }
-    
+
     public void testIsCrossedByTransition() {
         assertFalse(DataVersion.JAVA_1_15_19W36A.isCrossedByTransition(DataVersion.JAVA_1_15_19W36A.id(), DataVersion.JAVA_1_15_19W36A.id()));
         assertFalse(DataVersion.JAVA_1_15_19W36A.isCrossedByTransition(DataVersion.JAVA_1_15_0.id(), DataVersion.JAVA_1_15_1.id()));
@@ -135,6 +135,10 @@ public class DataVersionTest extends McaTestCase {
     // is limited by what Mojang puts into the version manifest. Some versions, it appears, don't
     // make it into the manifest such as the combat test builds and other experimental builds.
     public void testFetchMissingDataVersionInformation() throws IOException {
+        if (System.getenv("APPDATA") == null) {
+            // no minecraft installed ?
+            return;
+        }
         Path minecraftVersionsDirectory = Paths.get(System.getenv("APPDATA"), ".minecraft", "versions");
         if (!minecraftVersionsDirectory.toFile().exists()) {
             // probably not on Windows
